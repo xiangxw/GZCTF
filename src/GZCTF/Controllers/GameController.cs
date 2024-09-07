@@ -55,7 +55,7 @@ public class GameController(
     [HttpGet]
     [ProducesResponseType(typeof(BasicGameInfoModel[]), StatusCodes.Status200OK)]
     public async Task<IActionResult> Games(CancellationToken token) =>
-        Ok(await gameRepository.GetBasicGameInfo(10, 0, token));
+        Ok(await gameRepository.GetBasicGameInfo(100, 0, token));
 
     /// <summary>
     /// 获取比赛详细信息
