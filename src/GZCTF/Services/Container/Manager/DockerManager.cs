@@ -89,6 +89,11 @@ public class DockerManager : IContainerManager
             };
         }
 
+        if (config.Image.Contains("_sysbox_runc"))
+        {
+            parameters.HostConfig.Runtime = "sysbox-runc";
+        }
+
         CreateContainerResponse? containerRes;
         var retry = 0;
 
