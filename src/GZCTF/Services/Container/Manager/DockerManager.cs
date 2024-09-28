@@ -253,8 +253,8 @@ public class DockerManager : IContainerManager
             // DO NOT REMOVE OR MODIFY THE FOLLOWING LINE.
             // Please see LICENSE_ADDENDUM.txt for details.
             Env = config.Flag is null
-                ? [$"GZCTF_TEAM_ID={config.TeamId}"]
-                : [$"GZCTF_FLAG={config.Flag}", $"GZCTF_TEAM_ID={config.TeamId}"],
+                ? [$"GZCTF_TEAM_ID={config.TeamId}", $"GZCTF_USER_ID={config.UserId}", $"CHALLENGE_ID={config.ChallengeId}", $"GAME_ID={config.GameId}"]
+                : [$"GZCTF_FLAG={config.Flag}", $"GZCTF_TEAM_ID={config.TeamId}", $"GZCTF_USER_ID={config.UserId}", $"CHALLENGE_ID={config.ChallengeId}", $"GAME_ID={config.GameId}"],
             HostConfig = new()
             {
                 Memory = config.MemoryLimit * 1024 * 1024,

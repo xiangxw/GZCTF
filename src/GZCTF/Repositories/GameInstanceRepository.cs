@@ -162,6 +162,7 @@ public class GameInstanceRepository(
             TeamId = team.Id.ToString(),
             UserId = user.Id,
             ChallengeId = gameInstance.ChallengeId,
+            GameId = gameInstance.Challenge.GameId,
             Flag = gameInstance.FlagContext?.Flag, // static challenge has no specific flag
             Image = gameInstance.Challenge.ContainerImage,
             CPUCount = gameInstance.Challenge.CPUCount ?? 1,
