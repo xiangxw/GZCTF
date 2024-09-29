@@ -33,6 +33,30 @@ public class DockerManager : IContainerManager
     {
         try
         {
+            var containerExecCreateResponse = await _client.Exec.ExecCreateContainerAsync(container.ContainerId,
+                new ContainerExecCreateParameters
+                {
+                    AttachStderr = true,
+                    AttachStdout = true,
+                    Cmd = new String[]{ "/about_to_destroy" }
+                })
+                .ConfigureAwait(false);
+            using (var stream = await _client.Exec.StartAndAttachContainerExecAsync(containerExecCreateResponse.ID, false)
+                .ConfigureAwait(false))
+            {
+                await stream.ReadOutputToEndAsync(new CancellationToken());
+            }
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e, "{msg}",
+                Program.StaticLocalizer[nameof(Resources.Program.ContainerManager_ContainerDeletionFailed),
+                    container.ContainerId]);
+            return;
+        }
+
+        try
+        {
             await _client.Containers.RemoveContainerAsync(container.ContainerId,
                 new() { Force = true }, token);
         }
