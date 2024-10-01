@@ -52,7 +52,6 @@ public class DockerManager : IContainerManager
             _logger.LogError(e, "{msg}",
                 Program.StaticLocalizer[nameof(Resources.Program.ContainerManager_ContainerDeletionFailed),
                     container.ContainerId]);
-            return;
         }
 
         try
